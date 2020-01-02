@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xuxuzhaozhao2015.github.io</id>
     <title>xuxuzhaozhao</title>
-    <updated>2020-01-02T01:41:00.237Z</updated>
+    <updated>2020-01-02T01:45:20.060Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xuxuzhaozhao2015.github.io"/>
     <link rel="self" href="https://xuxuzhaozhao2015.github.io/atom.xml"/>
@@ -12,10 +12,10 @@
     <rights>All rights reserved 2020, xuxuzhaozhao</rights>
     <entry>
         <title type="html"><![CDATA[在47.102.122.122上部署docker redis、mysql 8.0.18]]></title>
-        <id>https://xuxuzhaozhao2015.github.io/post/hello-gridea</id>
-        <link href="https://xuxuzhaozhao2015.github.io/post/hello-gridea">
+        <id>https://xuxuzhaozhao2015.github.io/post/linuxdeployredis</id>
+        <link href="https://xuxuzhaozhao2015.github.io/post/linuxdeployredis">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
+        <updated>2020-01-02T01:43:09.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
 <p>记得在阿里云控制端中将3306与6379端口加入安全组。</p>
 </blockquote>
