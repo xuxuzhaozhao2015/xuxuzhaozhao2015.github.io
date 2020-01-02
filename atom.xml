@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xuxuzhaozhao2015.github.io</id>
     <title>xuxuzhaozhao</title>
-    <updated>2020-01-02T01:45:20.060Z</updated>
+    <updated>2020-01-02T01:51:23.869Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xuxuzhaozhao2015.github.io"/>
     <link rel="self" href="https://xuxuzhaozhao2015.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://xuxuzhaozhao2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xuxuzhaozhao</rights>
     <entry>
-        <title type="html"><![CDATA[在47.102.122.122上部署docker redis、mysql 8.0.18]]></title>
+        <title type="html"><![CDATA[在阿里云 Centos 7 上部署docker redis、mysql 8.0.18]]></title>
         <id>https://xuxuzhaozhao2015.github.io/post/linuxdeployredis</id>
         <link href="https://xuxuzhaozhao2015.github.io/post/linuxdeployredis">
         </link>
@@ -73,8 +73,8 @@ docker port myredis
 root@338dc6c82e1e:/data# redis-cli
 </code></pre>
 <h3 id="6-客户端连接">6、客户端连接</h3>
-<pre><code>redis-cli -h 47.102.122.122 -p 6379
-47.102.122.122:6379&gt;auth fuckyouhacker
+<pre><code>redis-cli -h 47.102.xxx.xxx -p 6379
+47.102.xxx.xxx:6379&gt;auth fuckhacker
 </code></pre>
 <p>开源客户端：<br>
 https://github.com/qishibo/AnotherRedisDesktopManager/releases</p>
