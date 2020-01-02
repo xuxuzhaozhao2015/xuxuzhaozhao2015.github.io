@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xuxuzhaozhao2015.github.io</id>
     <title>xuxuzhaozhao</title>
-    <updated>2020-01-02T01:56:14.623Z</updated>
+    <updated>2020-01-02T09:04:00.246Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xuxuzhaozhao2015.github.io"/>
     <link rel="self" href="https://xuxuzhaozhao2015.github.io/atom.xml"/>
@@ -11,13 +11,14 @@
     <icon>https://xuxuzhaozhao2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xuxuzhaozhao</rights>
     <entry>
-        <title type="html"><![CDATA[在阿里云 Centos 7 上部署docker redis、mysql 8.0.18]]></title>
+        <title type="html"><![CDATA[在阿里云 Centos 7 上部署基于 Docker 的项目]]></title>
         <id>https://xuxuzhaozhao2015.github.io/post/linuxdeployredis</id>
         <link href="https://xuxuzhaozhao2015.github.io/post/linuxdeployredis">
         </link>
         <updated>2020-01-02T01:43:09.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
-<p>记得在阿里云控制端中将3306与6379端口加入安全组。</p>
+<p>以下技术栈 redis、mysql 8.0.18、springboot、vue、nginx<br>
+记得在阿里云控制端中将3306与6379端口加入安全组。</p>
 </blockquote>
 <hr>
 <h2 id="redis">redis😀</h2>
@@ -157,6 +158,130 @@ mysql&gt; select host,user,plugin from user where user = 'root';
 | %         | root | mysql_native_password |
 +-----------+------+-----------------------+
 </code></pre>
+<hr>
+<h2 id="基于-java-8-部署-springboot-后端">基于 java 8 部署 springboot 后端 😬</h2>
+<h3 id="1-maven-package-打包">1、maven-&gt;package 打包</h3>
+<p><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954188124.png" alt="" loading="lazy"><br>
+双击package即可</p>
+<h3 id="2-拷贝jar到服务器上">2、拷贝jar到服务器上</h3>
+<p>找到target中的jar文件将其拷贝到服务器上<br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1577954303163.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954316959.png" alt="" loading="lazy"></figure>
+<h3 id="3-编写dockerfile文件">3、编写Dockerfile文件</h3>
+<pre><code>FROM java:8
+VOLUME /tmp
+ADD eladmin-system-2.4.jar app.jar
+EXPOSE 8080
+ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+<ul>
+<li>FROM java:8，表示基镜像是java8</li>
+<li>VOLUME /tmp，表示 指定临时文件目录为/tmp。其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp。该步骤是可选的</li>
+<li>ADD eladmin-system-2.4.jar app.jar，表示将jar包添加到镜像中，并重命名app.jar</li>
+<li>EXPOSE 8080，表示暴露的端口是8080</li>
+<li>ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]，表示启动时运行 java -jar app.jar</li>
+</ul>
+<h3 id="4-编写启动脚本-startupsh">4、编写启动脚本 startup.sh</h3>
+<pre><code>APPNAME=eladminsystem
+PORT=8080
+docker build -t $APPNAME .
+docker run -d -h 127.0.0.1  --name $APPNAME -p $PORT:$PORT $APPNAME
+</code></pre>
+<ul>
+<li>镜像名称必须小写（如<code>eladminsystem</code>），大写启动会报错</li>
+<li>docker build -t <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>P</mi><mi>P</mi><mi>N</mi><mi>A</mi><mi>M</mi><mi>E</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">表</mi><mi mathvariant="normal">示</mi><mi mathvariant="normal">执</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">编</mi><mi mathvariant="normal">译</mi><mi mathvariant="normal">镜</mi><mi mathvariant="normal">像</mi><mi mathvariant="normal">，</mi></mrow><annotation encoding="application/x-tex">APPNAME .
+表示 执行编译镜像，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord">.</span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">示</span><span class="mord cjk_fallback">执</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">编</span><span class="mord cjk_fallback">译</span><span class="mord cjk_fallback">镜</span><span class="mord cjk_fallback">像</span><span class="mord cjk_fallback">，</span></span></span></span>APPNAME 是镜像名称；“.”表示Dockerfile在当前路径下。</li>
+<li>docker run -d -h 0.0.0.0 --name $APPNAME -p <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mi>O</mi><mi>R</mi><mi>T</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">PORT:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>PORT $APPNAME<br>
+运行镜像，端口映射为8000</li>
+</ul>
+<p>授予执行权限：chmod +x startup.sh</p>
+<h3 id="5-编写停止脚本-shutdownsh">5、编写停止脚本 shutdown.sh</h3>
+<pre><code>APPNAME=eladminsystem
+# 停止容器，删除容器，删除镜像
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker stop
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker rm
+docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
+</code></pre>
+<p>授予执行权限：chmod +x shutdown.sh</p>
+<h3 id="6-测试">6、测试</h3>
+<pre><code>./startup.sh
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954694845.png" alt="" loading="lazy"></figure>
+<pre><code>./shutdown.sh
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954718902.png" alt="" loading="lazy"></figure>
+<p>如果没有启动成功，记得使用 <code>docker logs eladmin-system</code>查看日志😁</p>
+<hr>
+<h2 id="部署-nginx-并且代理-vue前端">部署 nginx 并且代理 vue前端</h2>
+<p><code>docker pull nginx</code></p>
+<h3 id="1-创建默认配置文件defaultconf">1、创建默认配置文件default.conf</h3>
+<p>创建文件夹 /root/docker/nginx</p>
+<pre><code>server {
+    listen  80;
+    server_name localhost;
+
+    access_log  /var/log/nginx/host.access.log  main;
+    error_log   /var/log/nginx/error.log    error;
+
+    location / {
+        root    /usr/share/nginx/html;
+        index   index.html index.htm;
+        # 如果vue-router使用的是history模式，try_files $uri $uri/ /index.html;  非常重要！！！
+        try_files   $uri $uri/ /index.html;
+    }
+
+    error_page  500 502 503 504 /50x.html;
+    location = /50x.html{
+        root /usr/share/nginx/html;
+    }
+}
+</code></pre>
+<h3 id="2-创建dockerfile文件">2、创建Dockerfile文件</h3>
+<p>将 <code>npm run build:prod</code>生成的文件及文件夹拷贝入此处<br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1577955340602.png" alt="" loading="lazy"></p>
+<p>进入 docker/nginx中 vim Dockerfile文件</p>
+<pre><code>FROM nginx
+COPY dist/ /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
+</code></pre>
+<h3 id="3-编写启动脚本">3、编写启动脚本</h3>
+<pre><code>APPNAME=eladminweb
+PORT=8080
+docker build -t $APPNAME .
+docker run -d  --name $APPNAME -p $PORT:$PORT $APPNAME
+</code></pre>
+<p>授予执行权限：chmod +x startup.sh</p>
+<h3 id="4-编写停止脚本">4、编写停止脚本</h3>
+<pre><code>APPNAME=eladminweb
+# 停止容器，删除容器，删除镜像
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker stop
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker rm
+docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
+</code></pre>
+<p>授予执行权限：chmod +x shutdown.sh</p>
+<hr>
+<h2 id="使用-frp-反向代理让外网也能访问局域网中的网站">使用 frp 反向代理，让外网也能访问局域网中的网站</h2>
+<h3 id="fprogramfiles内网穿透frp_0300_windows_amd64-中修改-frpcini-文件">F:\ProgramFiles\内网穿透\frp_0.30.0_windows_amd64 中修改 frpc.ini 文件</h3>
+<pre><code>[common]
+# 需要将【findhome.xuxuzhaozhao.top】解析到【211.149.195.55】上
+server_addr = 211.149.195.55
+server_port = 7000
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389
+remote_port = 6000
+
+[web]
+type = http
+local_ip = 192.168.160.129
+local_port = 80
+#  访问【findhome.xuxuzhaozhao.top:8081】代理到 【本机 127.0.0.1:6627】
+custom_domains = findhome.xuxuzhaozhao.top
+</code></pre>
+<p>http://findhome.xuxuzhaozhao.top:8081/</p>
+<figure data-type="image" tabindex="4"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577955649964.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>

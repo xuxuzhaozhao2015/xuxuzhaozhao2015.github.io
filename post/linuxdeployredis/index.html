@@ -2,16 +2,17 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>在阿里云 Centos 7 上部署docker redis、mysql 8.0.18 | xuxuzhaozhao</title>
-<link rel="shortcut icon" href="https://xuxuzhaozhao2015.github.io/favicon.ico?v=1577930168454">
+<title>在阿里云 Centos 7 上部署基于 Docker 的项目 | xuxuzhaozhao</title>
+<link rel="shortcut icon" href="https://xuxuzhaozhao2015.github.io/favicon.ico?v=1577955837568">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://xuxuzhaozhao2015.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="在阿里云 Centos 7 上部署docker redis、mysql 8.0.18 | xuxuzhaozhao - Atom Feed" href="https://xuxuzhaozhao2015.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="在阿里云 Centos 7 上部署基于 Docker 的项目 | xuxuzhaozhao - Atom Feed" href="https://xuxuzhaozhao2015.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
     <meta name="description" content="
+以下技术栈 redis、mysql 8.0.18、springboot、vue、nginx
 记得在阿里云控制端中将3306与6379端口加入安全组。
 
 
@@ -19,11 +20,7 @@ redis😀
 1、获取redis
 
 docker search redis
-docker pull redis:latest
-docker images
-
-2、创建宿主机
-#..." />
+doc..." />
     <meta name="keywords" content="linux,redis,mysql 8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -33,7 +30,7 @@ docker images
       <div class="main-content">
         <div class="site-header">
   <a href="https://xuxuzhaozhao2015.github.io">
-  <img class="avatar" src="https://xuxuzhaozhao2015.github.io/images/avatar.png?v=1577930168454" alt="">
+  <img class="avatar" src="https://xuxuzhaozhao2015.github.io/images/avatar.png?v=1577955837568" alt="">
   </a>
   <h1 class="site-title">
     xuxuzhaozhao
@@ -86,14 +83,14 @@ docker images
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              在阿里云 Centos 7 上部署docker redis、mysql 8.0.18
+              在阿里云 Centos 7 上部署基于 Docker 的项目
             </h2>
             <div class="post-info">
               <span>
                 2020-01-02
               </span>
               <span>
-                5 min read
+                9 min read
               </span>
               
                 <a href="https://xuxuzhaozhao2015.github.io/tag/xNLinIy233" class="post-tag">
@@ -115,7 +112,8 @@ docker images
             <div class="post-content-wrapper">
               <div class="post-content">
                 <blockquote>
-<p>记得在阿里云控制端中将3306与6379端口加入安全组。</p>
+<p>以下技术栈 redis、mysql 8.0.18、springboot、vue、nginx<br>
+记得在阿里云控制端中将3306与6379端口加入安全组。</p>
 </blockquote>
 <hr>
 <h2 id="redis">redis😀</h2>
@@ -255,6 +253,130 @@ mysql&gt; select host,user,plugin from user where user = 'root';
 | %         | root | mysql_native_password |
 +-----------+------+-----------------------+
 </code></pre>
+<hr>
+<h2 id="基于-java-8-部署-springboot-后端">基于 java 8 部署 springboot 后端 😬</h2>
+<h3 id="1-maven-package-打包">1、maven-&gt;package 打包</h3>
+<p><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954188124.png" alt="" loading="lazy"><br>
+双击package即可</p>
+<h3 id="2-拷贝jar到服务器上">2、拷贝jar到服务器上</h3>
+<p>找到target中的jar文件将其拷贝到服务器上<br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1577954303163.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954316959.png" alt="" loading="lazy"></figure>
+<h3 id="3-编写dockerfile文件">3、编写Dockerfile文件</h3>
+<pre><code>FROM java:8
+VOLUME /tmp
+ADD eladmin-system-2.4.jar app.jar
+EXPOSE 8080
+ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+<ul>
+<li>FROM java:8，表示基镜像是java8</li>
+<li>VOLUME /tmp，表示 指定临时文件目录为/tmp。其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp。该步骤是可选的</li>
+<li>ADD eladmin-system-2.4.jar app.jar，表示将jar包添加到镜像中，并重命名app.jar</li>
+<li>EXPOSE 8080，表示暴露的端口是8080</li>
+<li>ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]，表示启动时运行 java -jar app.jar</li>
+</ul>
+<h3 id="4-编写启动脚本-startupsh">4、编写启动脚本 startup.sh</h3>
+<pre><code>APPNAME=eladminsystem
+PORT=8080
+docker build -t $APPNAME .
+docker run -d -h 127.0.0.1  --name $APPNAME -p $PORT:$PORT $APPNAME
+</code></pre>
+<ul>
+<li>镜像名称必须小写（如<code>eladminsystem</code>），大写启动会报错</li>
+<li>docker build -t <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>P</mi><mi>P</mi><mi>N</mi><mi>A</mi><mi>M</mi><mi>E</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">表</mi><mi mathvariant="normal">示</mi><mi mathvariant="normal">执</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">编</mi><mi mathvariant="normal">译</mi><mi mathvariant="normal">镜</mi><mi mathvariant="normal">像</mi><mi mathvariant="normal">，</mi></mrow><annotation encoding="application/x-tex">APPNAME .
+表示 执行编译镜像，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord">.</span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">示</span><span class="mord cjk_fallback">执</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">编</span><span class="mord cjk_fallback">译</span><span class="mord cjk_fallback">镜</span><span class="mord cjk_fallback">像</span><span class="mord cjk_fallback">，</span></span></span></span>APPNAME 是镜像名称；“.”表示Dockerfile在当前路径下。</li>
+<li>docker run -d -h 0.0.0.0 --name $APPNAME -p <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mi>O</mi><mi>R</mi><mi>T</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">PORT:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span>PORT $APPNAME<br>
+运行镜像，端口映射为8000</li>
+</ul>
+<p>授予执行权限：chmod +x startup.sh</p>
+<h3 id="5-编写停止脚本-shutdownsh">5、编写停止脚本 shutdown.sh</h3>
+<pre><code>APPNAME=eladminsystem
+# 停止容器，删除容器，删除镜像
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker stop
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker rm
+docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
+</code></pre>
+<p>授予执行权限：chmod +x shutdown.sh</p>
+<h3 id="6-测试">6、测试</h3>
+<pre><code>./startup.sh
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954694845.png" alt="" loading="lazy"></figure>
+<pre><code>./shutdown.sh
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954718902.png" alt="" loading="lazy"></figure>
+<p>如果没有启动成功，记得使用 <code>docker logs eladmin-system</code>查看日志😁</p>
+<hr>
+<h2 id="部署-nginx-并且代理-vue前端">部署 nginx 并且代理 vue前端</h2>
+<p><code>docker pull nginx</code></p>
+<h3 id="1-创建默认配置文件defaultconf">1、创建默认配置文件default.conf</h3>
+<p>创建文件夹 /root/docker/nginx</p>
+<pre><code>server {
+    listen  80;
+    server_name localhost;
+
+    access_log  /var/log/nginx/host.access.log  main;
+    error_log   /var/log/nginx/error.log    error;
+
+    location / {
+        root    /usr/share/nginx/html;
+        index   index.html index.htm;
+        # 如果vue-router使用的是history模式，try_files $uri $uri/ /index.html;  非常重要！！！
+        try_files   $uri $uri/ /index.html;
+    }
+
+    error_page  500 502 503 504 /50x.html;
+    location = /50x.html{
+        root /usr/share/nginx/html;
+    }
+}
+</code></pre>
+<h3 id="2-创建dockerfile文件">2、创建Dockerfile文件</h3>
+<p>将 <code>npm run build:prod</code>生成的文件及文件夹拷贝入此处<br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1577955340602.png" alt="" loading="lazy"></p>
+<p>进入 docker/nginx中 vim Dockerfile文件</p>
+<pre><code>FROM nginx
+COPY dist/ /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
+</code></pre>
+<h3 id="3-编写启动脚本">3、编写启动脚本</h3>
+<pre><code>APPNAME=eladminweb
+PORT=8080
+docker build -t $APPNAME .
+docker run -d  --name $APPNAME -p $PORT:$PORT $APPNAME
+</code></pre>
+<p>授予执行权限：chmod +x startup.sh</p>
+<h3 id="4-编写停止脚本">4、编写停止脚本</h3>
+<pre><code>APPNAME=eladminweb
+# 停止容器，删除容器，删除镜像
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker stop
+docker ps -a | grep &quot;$APPNAME&quot; | awk '{print $1 }'| xargs docker rm
+docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
+</code></pre>
+<p>授予执行权限：chmod +x shutdown.sh</p>
+<hr>
+<h2 id="使用-frp-反向代理让外网也能访问局域网中的网站">使用 frp 反向代理，让外网也能访问局域网中的网站</h2>
+<h3 id="fprogramfiles内网穿透frp_0300_windows_amd64-中修改-frpcini-文件">F:\ProgramFiles\内网穿透\frp_0.30.0_windows_amd64 中修改 frpc.ini 文件</h3>
+<pre><code>[common]
+# 需要将【findhome.xuxuzhaozhao.top】解析到【211.149.195.55】上
+server_addr = 211.149.195.55
+server_port = 7000
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389
+remote_port = 6000
+
+[web]
+type = http
+local_ip = 192.168.160.129
+local_port = 80
+#  访问【findhome.xuxuzhaozhao.top:8081】代理到 【本机 127.0.0.1:6627】
+custom_domains = findhome.xuxuzhaozhao.top
+</code></pre>
+<p>http://findhome.xuxuzhaozhao.top:8081/</p>
+<figure data-type="image" tabindex="4"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577955649964.png" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -277,6 +399,29 @@ mysql&gt; select host,user,plugin from user where user = 'root';
 <li><a href="#2-%E5%88%9B%E5%BB%BA-mysql-%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95">2、创建 MySQL 数据文件和配置文件 目录。</a></li>
 <li><a href="#3-%E5%88%9B%E5%BB%BA%E8%BF%90%E8%A1%8C-mysql-%E5%AE%B9%E5%99%A8">3、创建运行 MySQL 容器</a></li>
 <li><a href="#4-%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">4、进入容器修改初始密码，开启远程连接</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-java-8-%E9%83%A8%E7%BD%B2-springboot-%E5%90%8E%E7%AB%AF">基于 java 8 部署 springboot 后端 😬</a>
+<ul>
+<li><a href="#1-maven-package-%E6%89%93%E5%8C%85">1、maven-&gt;package 打包</a></li>
+<li><a href="#2-%E6%8B%B7%E8%B4%9Djar%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A">2、拷贝jar到服务器上</a></li>
+<li><a href="#3-%E7%BC%96%E5%86%99dockerfile%E6%96%87%E4%BB%B6">3、编写Dockerfile文件</a></li>
+<li><a href="#4-%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC-startupsh">4、编写启动脚本 startup.sh</a></li>
+<li><a href="#5-%E7%BC%96%E5%86%99%E5%81%9C%E6%AD%A2%E8%84%9A%E6%9C%AC-shutdownsh">5、编写停止脚本 shutdown.sh</a></li>
+<li><a href="#6-%E6%B5%8B%E8%AF%95">6、测试</a></li>
+</ul>
+</li>
+<li><a href="#%E9%83%A8%E7%BD%B2-nginx-%E5%B9%B6%E4%B8%94%E4%BB%A3%E7%90%86-vue%E5%89%8D%E7%AB%AF">部署 nginx 并且代理 vue前端</a>
+<ul>
+<li><a href="#1-%E5%88%9B%E5%BB%BA%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6defaultconf">1、创建默认配置文件default.conf</a></li>
+<li><a href="#2-%E5%88%9B%E5%BB%BAdockerfile%E6%96%87%E4%BB%B6">2、创建Dockerfile文件</a></li>
+<li><a href="#3-%E7%BC%96%E5%86%99%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC">3、编写启动脚本</a></li>
+<li><a href="#4-%E7%BC%96%E5%86%99%E5%81%9C%E6%AD%A2%E8%84%9A%E6%9C%AC">4、编写停止脚本</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8-frp-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E8%AE%A9%E5%A4%96%E7%BD%91%E4%B9%9F%E8%83%BD%E8%AE%BF%E9%97%AE%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%AD%E7%9A%84%E7%BD%91%E7%AB%99">使用 frp 反向代理，让外网也能访问局域网中的网站</a>
+<ul>
+<li><a href="#fprogramfiles%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp_0300_windows_amd64-%E4%B8%AD%E4%BF%AE%E6%94%B9-frpcini-%E6%96%87%E4%BB%B6">F:\ProgramFiles\内网穿透\frp_0.30.0_windows_amd64 中修改 frpc.ini 文件</a></li>
 </ul>
 </li>
 </ul>
