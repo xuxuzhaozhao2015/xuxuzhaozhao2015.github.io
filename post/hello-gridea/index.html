@@ -2,23 +2,28 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | xuxuzhaozhao</title>
-<link rel="shortcut icon" href="https://xuxuzhaozhao2015.github.io/favicon.ico?v=1577928348101">
+<title>在47.102.122.122上部署docker redis、mysql 8.0.18 | xuxuzhaozhao</title>
+<link rel="shortcut icon" href="https://xuxuzhaozhao2015.github.io/favicon.ico?v=1577929179072">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://xuxuzhaozhao2015.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Hello Gridea | xuxuzhaozhao - Atom Feed" href="https://xuxuzhaozhao2015.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="在47.102.122.122上部署docker redis、mysql 8.0.18 | xuxuzhaozhao - Atom Feed" href="https://xuxuzhaozhao2015.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="👏  欢迎使用 Gridea ！
-✍️  Gridea 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...
+    <meta name="description" content="
+[TOC]
 
-Github
-Gridea 主页
-示例网站
-特性👇
-📝  你可以使用最酷的 Markdo..." />
+记得在阿里云控制端中将3306与6379端口加入安全组。
+
+redis😀
+1、获取redis
+
+docker search redis
+docker pull redis:latest
+docker images
+
+2、创..." />
     <meta name="keywords" content="Gridea" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -28,7 +33,7 @@ Gridea 主页
       <div class="main-content">
         <div class="site-header">
   <a href="https://xuxuzhaozhao2015.github.io">
-  <img class="avatar" src="https://xuxuzhaozhao2015.github.io/images/avatar.png?v=1577928348101" alt="">
+  <img class="avatar" src="https://xuxuzhaozhao2015.github.io/images/avatar.png?v=1577929179072" alt="">
   </a>
   <h1 class="site-title">
     xuxuzhaozhao
@@ -81,14 +86,14 @@ Gridea 主页
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              在47.102.122.122上部署docker redis、mysql 8.0.18
             </h2>
             <div class="post-info">
               <span>
                 2018-12-12
               </span>
               <span>
-                2 min read
+                5 min read
               </span>
               
                 <a href="https://xuxuzhaozhao2015.github.io/tag/HXnye8G1h" class="post-tag">
@@ -101,34 +106,172 @@ Gridea 主页
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <hr>
+<p>[TOC]</p>
+<blockquote>
+<p>记得在阿里云控制端中将3306与6379端口加入安全组。</p>
+</blockquote>
+<h2 id="redis">redis😀</h2>
+<h3 id="1-获取redis">1、获取redis</h3>
+<ul>
+<li>docker search redis</li>
+<li>docker pull redis:latest</li>
+<li>docker images</li>
+</ul>
+<h3 id="2-创建宿主机">2、创建宿主机</h3>
+<pre><code># 在根目录新建两个数据卷文件夹
+mkdir /home/docker/redis/{conf,data} -p
+cd /home/docker/redis/conf
+
+# 获取默认的redis.conf模版
+wget http://download.redis.io/redis-stable/redis.conf
+
+# 编辑redis.conf
+requirepass fuckyouhacker #必须使用密码
+appendonly yes #数据append
+logfile &quot;access.log&quot; #日志记录文件名
+
+# 远程访问 注释掉 127.0.0.1
+# bind 127.0.0.1
+protected-mode no # 启用远程访问
+
+# 退出conf进入/home/docker/redis
+cd ..
+</code></pre>
+<h3 id="3-运行redis">3、运行redis</h3>
+<pre><code># 命令分解
+docker run \
+-p 6379:6379 \ # 端口映射 宿主机:容器
+-v $PWD/data:/data:rw \ # 映射数据目录 rw 为读写，必须使用绝对路径
+-v $PWD/conf/redis.conf:/etc/redis/redis.conf:ro \ # 挂载配置文件 ro 为readonly，必须使用绝对路径
+--privileged=true \ # 给与一些权限
+--name myredis \ # 给容器起个名字
+-d redis /etc/redis/redis.conf # deamon 运行容器
+</code></pre>
+<h3 id="4-查看-myredis">4、查看 <code>myredis</code></h3>
+<pre><code>docker images
+
+# 如果没有看到任何容器，则说明出错了，使用以下命令查看日志
+docker logs myredis
+
+# 查看 myredis 的 ip 挂载 端口映射等信息
+docker inspect myredis
+# 查看 myredis 的端口映射
+docker port myredis
+</code></pre>
+<h3 id="5-进入myredis">5、进入<code>myredis</code></h3>
+<pre><code>[root@iZuf68eahm3loty2bz4uq1Z redis]# docker exec -it myredis /bin/bash
+root@338dc6c82e1e:/data# redis-cli
+</code></pre>
+<h3 id="6-客户端连接">6、客户端连接</h3>
+<pre><code>redis-cli -h 47.102.122.122 -p 6379
+47.102.122.122:6379&gt;auth fuckyouhacker
+</code></pre>
+<p>开源客户端：<br>
+https://github.com/qishibo/AnotherRedisDesktopManager/releases</p>
+<hr>
+<h2 id="mysql-8018">mysql 8.0.18</h2>
+<h3 id="1-拉取镜像">1、拉取镜像</h3>
+<pre><code>docker image pull mysql:8.0.18
+</code></pre>
+<h3 id="2-创建-mysql-数据文件和配置文件-目录">2、创建 MySQL 数据文件和配置文件 目录。</h3>
+<pre><code># 宿主机创建 MySQL conf、data 目录
+mkdir -p /home/data/docker/mysql/{conf,data}
+
+# 创建一个 MySQL 容器（临时的，只是为了复制文件）
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:8.0.18
+
+# 复制容器中 MySQL data 到宿主机
+docker cp mysql:/var/lib/mysql /root/docker/mysql/data
+
+# 复制容器中 MySQL 配置文件到宿主机
+docker cp mysql:/etc/mysql/my.cnf /root/docker/mysql/conf/my.cnf
+
+# 删除临时的 MySQL 容器
+docker rm -f mysql
+</code></pre>
+<h3 id="3-创建运行-mysql-容器">3、创建运行 MySQL 容器</h3>
+<pre><code>cd /root/docker/mysql
+
+docker run \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=123456 \
+    -e TZ=Asia/Shanghai \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $PWD/data/mysql:/var/lib/mysql \
+    -v $PWD/conf/my.cnf:/etc/mysql/my.cnf \
+    --name eladmin \
+    --privileged=true \
+    --restart=always \
+    -d mysql
+    
+参数说明：
+
+-p 3306:3306 容器 3306 端口映射到主机 3306 端口
+-e MYSQL_ROOT_PASSWORD=123456 指定 MySQL 初始密码
+-e TZ=Asia/Shanghai 设置容器默认时区
+-v /etc/localtime:/etc/localtime:ro 设置容器时间与宿主机时间同步
+-v /home/data/docker/mysql/data/mysql:/var/lib/mysql 将容器 mysql data 目录挂载到宿主机
+-v /home/data/docker/mysql/conf/my.cnf:/etc/mysql/my.cnf 将容器 mysql 配置文件挂载到宿主机
+--name mysql_8.0.18 设置容器名称
+--restart=always Docker 服务启动后，自动启动该容器
+--privileged=true 让容器中 root 用户拥有 root 权限，默认只有普通用户权限
+-d 后台运行容器，并返回容器ID
+mysql:8.0.18 镜像名，不加版本号，会使用最新版本
+</code></pre>
+<h3 id="4-进入容器修改初始密码开启远程连接">4、进入容器修改初始密码，开启远程连接</h3>
+<pre><code># 进入容器
+docker exec -it mysql_8.0.18 /bin/sh
+
+# 容器内执行，输入初始密码（如果初始密码不可以，不输密码直接敲回车试试）
+mysql -u root -p
+
+# 指定数据库
+mysql&gt; use mysql;
+
+# 修改初始密码，改变密码验证方式为 mysql_native_password 
+mysql&gt; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'P@ssw0rd';
+
+# 修改初始密码，改变密码验证方式为 mysql_native_password 
+mysql&gt; ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'P@ssw0rd';
+
+# 如果上面的 sql 出错，执行
+mysql&gt; update user set host = '%' where user = 'root';
+
+mysql&gt; FLUSH PRIVILEGES;
+
+# 执行完以上命令，验证一下
+mysql&gt; select host,user,plugin from user where user = 'root';
++-----------+------+-----------------------+
+| host      | user | plugin                |
++-----------+------+-----------------------+
+| %         | root | mysql_native_password |
++-----------+------+-----------------------+
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
+<li><a href="#redis">redis😀</a>
+<ul>
+<li><a href="#1-%E8%8E%B7%E5%8F%96redis">1、获取redis</a></li>
+<li><a href="#2-%E5%88%9B%E5%BB%BA%E5%AE%BF%E4%B8%BB%E6%9C%BA">2、创建宿主机</a></li>
+<li><a href="#3-%E8%BF%90%E8%A1%8Credis">3、运行redis</a></li>
+<li><a href="#4-%E6%9F%A5%E7%9C%8B-myredis">4、查看 <code>myredis</code></a></li>
+<li><a href="#5-%E8%BF%9B%E5%85%A5myredis">5、进入<code>myredis</code></a></li>
+<li><a href="#6-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5">6、客户端连接</a></li>
+</ul>
+</li>
+<li><a href="#mysql-8018">mysql 8.0.18</a>
+<ul>
+<li><a href="#1-%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F">1、拉取镜像</a></li>
+<li><a href="#2-%E5%88%9B%E5%BB%BA-mysql-%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%92%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95">2、创建 MySQL 数据文件和配置文件 目录。</a></li>
+<li><a href="#3-%E5%88%9B%E5%BB%BA%E8%BF%90%E8%A1%8C-mysql-%E5%AE%B9%E5%99%A8">3、创建运行 MySQL 容器</a></li>
+<li><a href="#4-%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5">4、进入容器修改初始密码，开启远程连接</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
