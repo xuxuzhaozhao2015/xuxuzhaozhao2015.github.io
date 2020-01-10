@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xuxuzhaozhao2015.github.io</id>
     <title>xuxuzhaozhao</title>
-    <updated>2020-01-08T08:30:08.865Z</updated>
+    <updated>2020-01-10T08:53:18.372Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xuxuzhaozhao2015.github.io"/>
     <link rel="self" href="https://xuxuzhaozhao2015.github.io/atom.xml"/>
@@ -11,14 +11,57 @@
     <icon>https://xuxuzhaozhao2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xuxuzhaozhao</rights>
     <entry>
+        <title type="html"><![CDATA[踩坑与技巧合集]]></title>
+        <id>https://xuxuzhaozhao2015.github.io/post/Javadamn</id>
+        <link href="https://xuxuzhaozhao2015.github.io/post/Javadamn">
+        </link>
+        <updated>2020-01-10T02:58:04.000Z</updated>
+        <content type="html"><![CDATA[<p>1、绑定错误</p>
+<pre><code>{
+  &quot;timestamp&quot;: &quot;2020-01-10T02:57:41.798+0000&quot;,
+  &quot;status&quot;: 500,
+  &quot;error&quot;: &quot;Internal Server Error&quot;,
+  &quot;message&quot;: &quot;Invalid bound statement (not found): com.findhome.adminsystem.dao.UserInfoMapper.selectById&quot;,
+  &quot;path&quot;: &quot;/select&quot;
+}
+</code></pre>
+<p>解决方案：</p>
+<pre><code>namespace 要写全不能只写到 com.findhome.adminsystem.dao
+&lt;mapper namespace=&quot;com.findhome.adminsystem.dao.UserInfoMapper&quot;&gt;
+</code></pre>
+<p>2、批量给配置设置值</p>
+<pre><code>@Data
+@Slf4j
+@Component
+@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+public class DuridDataSourceConfig {
+    private String url;
+
+    private String username;
+
+    private String password;
+
+    private String driverClassName;
+}
+</code></pre>
+<p>3、配置druid监控的时候报错</p>
+<pre><code>在监控界面-》数据源：(*) property for user to setup
+</code></pre>
+<p>配置白名单的时候，不要写localhost；发起一次数据库请求即可；</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[我要结婚啦]]></title>
         <id>https://xuxuzhaozhao2015.github.io/post/marry</id>
         <link href="https://xuxuzhaozhao2015.github.io/post/marry">
         </link>
         <updated>2020-01-02T01:52:15.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
-<p>与zhaozhao2011.9.1初识在成信院（现在叫成信大），2013.5.13牵手成功，2020.3.15结为夫妻。我会永远爱你，陪伴你，守护你，直到我死去的那天。</p>
+<p>与zhaozhao2011.9.1初识在成信院（现在叫成信大）💁‍♂，2013.5.13牵手成功👫，2016.1.21拿下一血🙆‍♂，2020.3.15结为夫妻👩‍❤️‍💋‍👩。我会永远爱你，陪伴你，守护你，直到我死去的那天。</p>
 </blockquote>
+<p><img src="https://xuxuzhaozhao2015.github.io/post-images/1578646263868.JPG" alt="" loading="lazy"><br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1578646322331.JPG" alt="" loading="lazy"><br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1578646338926.JPG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
