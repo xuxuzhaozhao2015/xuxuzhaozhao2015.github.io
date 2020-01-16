@@ -3,10 +3,10 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>在阿里云 Centos 7 上部署基于 Docker 的项目 | xuxuzhaozhao</title>
-<link rel="shortcut icon" href="https:// xuxuzhaozhao2015.github.io//favicon.ico?v=1579138004454">
+<link rel="shortcut icon" href="https:// xuxuzhaozhao2015.github.io/favicon.ico?v=1579138174334">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https:// xuxuzhaozhao2015.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="在阿里云 Centos 7 上部署基于 Docker 的项目 | xuxuzhaozhao - Atom Feed" href="https:// xuxuzhaozhao2015.github.io//atom.xml">
+<link rel="stylesheet" href="https:// xuxuzhaozhao2015.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="在阿里云 Centos 7 上部署基于 Docker 的项目 | xuxuzhaozhao - Atom Feed" href="https:// xuxuzhaozhao2015.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
@@ -29,8 +29,8 @@ doc..." />
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https:// xuxuzhaozhao2015.github.io/">
-  <img class="avatar" src="https:// xuxuzhaozhao2015.github.io//images/avatar.png?v=1579138004454" alt="">
+  <a href="https:// xuxuzhaozhao2015.github.io">
+  <img class="avatar" src="https:// xuxuzhaozhao2015.github.io/images/avatar.png?v=1579138174334" alt="">
   </a>
   <h1 class="site-title">
     xuxuzhaozhao
@@ -107,7 +107,7 @@ doc..." />
               
             </div>
             
-              <img class="post-feature-image" src="https:// xuxuzhaozhao2015.github.io//post-images/linuxdeployredis.jpg" alt="">
+              <img class="post-feature-image" src="https:// xuxuzhaozhao2015.github.io/post-images/linuxdeployredis.jpg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
@@ -256,12 +256,12 @@ mysql&gt; select host,user,plugin from user where user = 'root';
 <hr>
 <h2 id="基于-java-8-部署-springboot-后端">基于 java 8 部署 springboot 后端 😬</h2>
 <h3 id="1-maven-package-打包">1、maven-&gt;package 打包</h3>
-<p>![](https:// xuxuzhaozhao2015.github.io//post-images/1577954188124.png)<br>
+<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954188124.png)<br>
 双击package即可</p>
 <h3 id="2-拷贝jar到服务器上">2、拷贝jar到服务器上</h3>
 <p>找到target中的jar文件将其拷贝到服务器上<br>
-![](https:// xuxuzhaozhao2015.github.io//post-images/1577954303163.png)</p>
-<p>![](https:// xuxuzhaozhao2015.github.io//post-images/1577954316959.png)</p>
+![](https:// xuxuzhaozhao2015.github.io/post-images/1577954303163.png)</p>
+<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954316959.png)</p>
 <h3 id="3-编写dockerfile文件">3、编写Dockerfile文件</h3>
 <pre><code>FROM java:8
 VOLUME /tmp
@@ -301,10 +301,10 @@ docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
 <h3 id="6-测试">6、测试</h3>
 <pre><code>./startup.sh
 </code></pre>
-<p>![](https:// xuxuzhaozhao2015.github.io//post-images/1577954694845.png)</p>
+<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954694845.png)</p>
 <pre><code>./shutdown.sh
 </code></pre>
-<p>![](https:// xuxuzhaozhao2015.github.io//post-images/1577954718902.png)</p>
+<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954718902.png)</p>
 <p>如果没有启动成功，记得使用 <code>docker logs eladmin-system</code>查看日志😁</p>
 <hr>
 <h2 id="部署-nginx-并且代理-vue前端">部署 nginx 并且代理 vue前端</h2>
@@ -333,7 +333,7 @@ docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
 </code></pre>
 <h3 id="2-创建dockerfile文件">2、创建Dockerfile文件</h3>
 <p>将 <code>npm run build:prod</code>生成的文件及文件夹拷贝入此处<br>
-![](https:// xuxuzhaozhao2015.github.io//post-images/1577955340602.png)</p>
+![](https:// xuxuzhaozhao2015.github.io/post-images/1577955340602.png)</p>
 <p>进入 docker/nginx中 vim Dockerfile文件</p>
 <pre><code>FROM nginx
 COPY dist/ /usr/share/nginx/html/
@@ -385,7 +385,7 @@ local_port = 8000
 custom_domains = api.findhome.xuxuzhaozhao.top
 </code></pre>
 <p>http://findhome.xuxuzhaozhao.top:8081/</p>
-<p>![](https:// xuxuzhaozhao2015.github.io//post-images/1577955649964.png)</p>
+<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577955649964.png)</p>
 
               </div>
               <div class="toc-container">
@@ -448,7 +448,7 @@ custom_domains = api.findhome.xuxuzhaozhao.top
 
         <div class="site-footer">
   Powered by <a href="https://github.com/xuxuzhaozhao2015" target="_blank">xuxuzhaozhao2015</a>
-  <a class="rss" href="https:// xuxuzhaozhao2015.github.io//atom.xml" target="_blank">
+  <a class="rss" href="https:// xuxuzhaozhao2015.github.io/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>
