@@ -2,20 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>踩坑与技巧合集 | xuxuzhaozhao</title>
+<title>搭建Spring Boot 后台 | xuxuzhaozhao</title>
 <link rel="shortcut icon" href="https:// xuxuzhaozhao2015.github.io//favicon.ico?v=1579138004454">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https:// xuxuzhaozhao2015.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="踩坑与技巧合集 | xuxuzhaozhao - Atom Feed" href="https:// xuxuzhaozhao2015.github.io//atom.xml">
+<link rel="alternate" type="application/atom+xml" title="搭建Spring Boot 后台 | xuxuzhaozhao - Atom Feed" href="https:// xuxuzhaozhao2015.github.io//atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="1、绑定错误
-{
-  &quot;timestamp&quot;: &quot;2020-01-10T02:57:41.798+0000&quot;,
-  &quot;status&quot;: 500,
-  &quot;error&quo..." />
+    <meta name="description" content="1、结合mybatis
+model -&gt; dao(mapper) -&gt; mapper.xml -&gt; mybatis config -&gt; service -&gt; controller
+2、更改默认数据库池
+Duri..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -78,11 +77,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              踩坑与技巧合集
+              搭建Spring Boot 后台
             </h2>
             <div class="post-info">
               <span>
-                2020-01-10
+                2020-01-11
               </span>
               <span>
                 1 min read
@@ -90,42 +89,22 @@
               
             </div>
             
-              <img class="post-feature-image" src="https:// xuxuzhaozhao2015.github.io//post-images/Javadamn.jpg" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>1、绑定错误</p>
-<pre><code>{
-  &quot;timestamp&quot;: &quot;2020-01-10T02:57:41.798+0000&quot;,
-  &quot;status&quot;: 500,
-  &quot;error&quot;: &quot;Internal Server Error&quot;,
-  &quot;message&quot;: &quot;Invalid bound statement (not found): com.findhome.adminsystem.dao.UserInfoMapper.selectById&quot;,
-  &quot;path&quot;: &quot;/select&quot;
-}
-</code></pre>
-<p>解决方案：</p>
-<pre><code>namespace 要写全不能只写到 com.findhome.adminsystem.dao
-&lt;mapper namespace=&quot;com.findhome.adminsystem.dao.UserInfoMapper&quot;&gt;
-</code></pre>
-<p>2、批量给配置设置值</p>
-<pre><code>@Data
-@Slf4j
-@Component
-@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
-public class DuridDataSourceConfig {
-    private String url;
-
-    private String username;
-
-    private String password;
-
-    private String driverClassName;
-}
-</code></pre>
-<p>3、配置druid监控的时候报错</p>
-<pre><code>在监控界面-》数据源：(*) property for user to setup
-</code></pre>
-<p>配置白名单的时候，不要写localhost；发起一次数据库请求即可；</p>
+                <p>1、结合mybatis<br>
+model -&gt; dao(mapper) -&gt; mapper.xml -&gt; mybatis config -&gt; service -&gt; controller</p>
+<p>2、更改默认数据库池<br>
+DuridDatasourceConfig -&gt; DuridMonitorConfig</p>
+<p>3、统一返回值<br>
+RetCode -&gt; RetResult -&gt; 建造者模式</p>
+<p>4、web config 序列化字符串设置<br>
+WebConfig -&gt; FastJsonConfig</p>
+<p>5、全局异常处理<br>
+GlobalExceptionResolverConfig -&gt; ConfigurationAdvice</p>
+<p>6、swagger统一Api管理<br>
+SwaggerConfig -&gt; UserController</p>
+<p>7、数据库物理分页 pagehelper<br>
+配置pagehelper配置项 -&gt; 修改mapper.xml 增加selectAll -&gt; dao -&gt; serivce -&gt; serviceImpl -&gt; controller</p>
 
               </div>
               <div class="toc-container">
@@ -138,9 +117,9 @@ public class DuridDataSourceConfig {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https:// xuxuzhaozhao2015.github.io/post/marry">
+            <a href="https:// xuxuzhaozhao2015.github.io/post/Javadamn">
               <h3 class="post-title">
-                我要结婚啦
+                踩坑与技巧合集
               </h3>
             </a>
           </div>
