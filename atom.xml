@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https:// xuxuzhaozhao2015.github.io</id>
+    <id>https://xuxuzhaozhao2015.github.io</id>
     <title>xuxuzhaozhao</title>
-    <updated>2020-01-16T01:36:16.720Z</updated>
+    <updated>2020-01-16T01:41:36.225Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https:// xuxuzhaozhao2015.github.io"/>
-    <link rel="self" href="https:// xuxuzhaozhao2015.github.io/atom.xml"/>
+    <link rel="alternate" href="https://xuxuzhaozhao2015.github.io"/>
+    <link rel="self" href="https://xuxuzhaozhao2015.github.io/atom.xml"/>
     <subtitle>Aspire to inspire until I expire.</subtitle>
-    <logo>https:// xuxuzhaozhao2015.github.io/images/avatar.png</logo>
-    <icon>https:// xuxuzhaozhao2015.github.io/favicon.ico</icon>
+    <logo>https://xuxuzhaozhao2015.github.io/images/avatar.png</logo>
+    <icon>https://xuxuzhaozhao2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xuxuzhaozhao</rights>
     <entry>
         <title type="html"><![CDATA[搭建Spring Boot 后台]]></title>
-        <id>https:// xuxuzhaozhao2015.github.io/post/buildspringboot</id>
-        <link href="https:// xuxuzhaozhao2015.github.io/post/buildspringboot">
+        <id>https://xuxuzhaozhao2015.github.io/post/buildspringboot</id>
+        <link href="https://xuxuzhaozhao2015.github.io/post/buildspringboot">
         </link>
         <updated>2020-01-11T05:59:50.000Z</updated>
         <content type="html"><![CDATA[<p>1、结合mybatis<br>
@@ -34,8 +34,8 @@ SwaggerConfig -&gt; UserController</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[踩坑与技巧合集]]></title>
-        <id>https:// xuxuzhaozhao2015.github.io/post/Javadamn</id>
-        <link href="https:// xuxuzhaozhao2015.github.io/post/Javadamn">
+        <id>https://xuxuzhaozhao2015.github.io/post/Javadamn</id>
+        <link href="https://xuxuzhaozhao2015.github.io/post/Javadamn">
         </link>
         <updated>2020-01-10T02:58:04.000Z</updated>
         <content type="html"><![CDATA[<p>1、绑定错误</p>
@@ -74,22 +74,22 @@ public class DuridDataSourceConfig {
     </entry>
     <entry>
         <title type="html"><![CDATA[我要结婚啦]]></title>
-        <id>https:// xuxuzhaozhao2015.github.io/post/marry</id>
-        <link href="https:// xuxuzhaozhao2015.github.io/post/marry">
+        <id>https://xuxuzhaozhao2015.github.io/post/marry</id>
+        <link href="https://xuxuzhaozhao2015.github.io/post/marry">
         </link>
         <updated>2020-01-02T01:52:15.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
 <p>与zhaozhao2011.9.1初识在成信院（现在叫成信大）💁‍♂，2013.5.13牵手成功👫，2020.3.15结为夫妻👩‍❤️‍💋‍👩。我会永远爱你，陪伴你，守护你，直到我死去的那天。</p>
 </blockquote>
-<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1578646263868.JPG)<br>
-![](https:// xuxuzhaozhao2015.github.io/post-images/1578646322331.JPG)<br>
-![](https:// xuxuzhaozhao2015.github.io/post-images/1578646338926.JPG)</p>
+<p><img src="https://xuxuzhaozhao2015.github.io/post-images/1578646263868.JPG" alt="" loading="lazy"><br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1578646322331.JPG" alt="" loading="lazy"><br>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1578646338926.JPG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[在阿里云 Centos 7 上部署基于 Docker 的项目]]></title>
-        <id>https:// xuxuzhaozhao2015.github.io/post/linuxdeployredis</id>
-        <link href="https:// xuxuzhaozhao2015.github.io/post/linuxdeployredis">
+        <id>https://xuxuzhaozhao2015.github.io/post/linuxdeployredis</id>
+        <link href="https://xuxuzhaozhao2015.github.io/post/linuxdeployredis">
         </link>
         <updated>2020-01-02T01:43:09.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
@@ -237,12 +237,12 @@ mysql&gt; select host,user,plugin from user where user = 'root';
 <hr>
 <h2 id="基于-java-8-部署-springboot-后端">基于 java 8 部署 springboot 后端 😬</h2>
 <h3 id="1-maven-package-打包">1、maven-&gt;package 打包</h3>
-<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954188124.png)<br>
+<p><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954188124.png" alt="" loading="lazy"><br>
 双击package即可</p>
 <h3 id="2-拷贝jar到服务器上">2、拷贝jar到服务器上</h3>
 <p>找到target中的jar文件将其拷贝到服务器上<br>
-![](https:// xuxuzhaozhao2015.github.io/post-images/1577954303163.png)</p>
-<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954316959.png)</p>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1577954303163.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954316959.png" alt="" loading="lazy"></figure>
 <h3 id="3-编写dockerfile文件">3、编写Dockerfile文件</h3>
 <pre><code>FROM java:8
 VOLUME /tmp
@@ -282,10 +282,10 @@ docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
 <h3 id="6-测试">6、测试</h3>
 <pre><code>./startup.sh
 </code></pre>
-<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954694845.png)</p>
+<figure data-type="image" tabindex="2"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954694845.png" alt="" loading="lazy"></figure>
 <pre><code>./shutdown.sh
 </code></pre>
-<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577954718902.png)</p>
+<figure data-type="image" tabindex="3"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577954718902.png" alt="" loading="lazy"></figure>
 <p>如果没有启动成功，记得使用 <code>docker logs eladmin-system</code>查看日志😁</p>
 <hr>
 <h2 id="部署-nginx-并且代理-vue前端">部署 nginx 并且代理 vue前端</h2>
@@ -314,7 +314,7 @@ docker images| grep &quot;$APPNAME&quot; | awk '{print $3 }' | xargs docker rmi
 </code></pre>
 <h3 id="2-创建dockerfile文件">2、创建Dockerfile文件</h3>
 <p>将 <code>npm run build:prod</code>生成的文件及文件夹拷贝入此处<br>
-![](https:// xuxuzhaozhao2015.github.io/post-images/1577955340602.png)</p>
+<img src="https://xuxuzhaozhao2015.github.io/post-images/1577955340602.png" alt="" loading="lazy"></p>
 <p>进入 docker/nginx中 vim Dockerfile文件</p>
 <pre><code>FROM nginx
 COPY dist/ /usr/share/nginx/html/
@@ -366,7 +366,7 @@ local_port = 8000
 custom_domains = api.findhome.xuxuzhaozhao.top
 </code></pre>
 <p>http://findhome.xuxuzhaozhao.top:8081/</p>
-<p>![](https:// xuxuzhaozhao2015.github.io/post-images/1577955649964.png)</p>
+<figure data-type="image" tabindex="4"><img src="https://xuxuzhaozhao2015.github.io/post-images/1577955649964.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>
